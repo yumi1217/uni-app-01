@@ -1,0 +1,23 @@
+{
+  "name": "uni-app-01",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yumi1217/uni-app-01.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yumi1217/uni-app-01/issues"
+  },
+  "homepage": "https://github.com/yumi1217/uni-app-01#readme",
+  "dependencies": {
+    "@escook/request-miniprogram": "^0.2.1",
+    "scss": "^0.2.4"
+  }
+}

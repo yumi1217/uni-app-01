@@ -100,9 +100,9 @@
         // 请求失败
         if (res.meta.status !== 200) return uni.$showMsg()
         // 对数据进行处理
-        res.message.forEach(floor=>{
-          floor.product_list.forEach(prod=>{
-            prod.url='/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1]
+        res.message.forEach(floor => {
+          floor.product_list.forEach(prod => {
+            prod.url = '/subpkg/goods_list/goods_list?' + prod.navigator_url.split('?')[1]
           })
         })
         this.floorList = res.message

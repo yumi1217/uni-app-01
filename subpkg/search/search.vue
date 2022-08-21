@@ -100,6 +100,9 @@
         uni.navigateTo({
           url: '/subpkg/goods_list/goods_list?query=' + kw
         })
+        // console.log(kw)
+        // this.kw = kw
+        // this.getSearchList()
       }
     },
     computed: {

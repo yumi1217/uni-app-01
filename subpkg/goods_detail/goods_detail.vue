@@ -39,7 +39,17 @@
 </template>
 
 <script>
+  import {
+    mapState,
+    mapMutations,
+    mapGetters
+  } from 'vuex'
   export default {
+    computed: {
+      ...mapState('m_cart', []),
+      // 把 m_cart 模块中名称为 total 的 getter 映射到当前页面中使用
+      ...mapGetters('m_cart', ['total']),
+    },
     data() {
       return {
         // 商品详情对象
@@ -51,7 +61,7 @@
         }, {
           icon: 'cart',
           text: '购物车',
-          info: 2
+          info: 0
         }],
         // 右侧按钮组的配置对象
         buttonGroup: [{
@@ -73,7 +83,19 @@
       // 调用请求商品详情数据的方法
       this.getGoodsDetail(goods_id)
     },
+    watch: {
+      total: {
+        handler(newVal) {
+          const findIndex = this.options.find((x) => x.text === '购物车')
+          if (findIndex) {
+            findIndex.info = newVal
+          }
+        },
+        immediate: true
+      }
+    },
     methods: {
+      ...mapMutations('m_cart', ['addToCart']),
       async getGoodsDetail(goods_id) {
         const {
           data: res
@@ -100,6 +122,23 @@
           uni.switchTab({
             url: '/pages/cart/cart'
           })
+        }
+      },
+      // 点击底部固定定位按钮的事件
+      buttonClick(e) {
+        // 1. 判断是否点击了 加入购物车 按钮
+        if (e.content.text === '加入购物车') {
+          // 2. 组织一个商品的信息对象
+          const goods = {
+            goods_id: this.goods_info.goods_id, // 商品的Id
+            goods_name: this.goods_info.goods_name, // 商品的名称
+            goods_price: this.goods_info.goods_price, // 商品的价格
+            goods_count: 1, // 商品的数量
+            goods_small_logo: this.goods_info.goods_small_logo, // 商品的图片
+            goods_state: true // 商品的勾选状态
+          }
+          // 3. 通过 this 调用映射过来的 addToCart 方法，把商品信息对象存储到购物车中
+          this.addToCart(goods)
         }
       }
     }

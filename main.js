@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 
+import store from './store/store.js'
+
 // 按需导入 $http 对象
 import { $http } from '@escook/request-miniprogram'
 uni.$http = $http
@@ -33,6 +35,7 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-	...App
+	...App,
+  store
 })
 app.$mount()
